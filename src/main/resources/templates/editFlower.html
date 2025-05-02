@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Edit Flower</h1>
+<form th:action="@{/flowers/{id}/update(id=${flower.id})}" th:object="${flower}" method="post">
+    <label for="type">Type:</label>
+    <input type="text" id="species" th:field="*{species}" required><br><br>
+    <label for="price">Price:</label>
+    <input type="number" id="price" th:field="*{price}" step="0.01" required><br><br>
+    <input type="hidden" name="idempotencyKey" th:value="${idempotencyKey}"/>
+    <button type="submit">Update</button>
+</form>
+</body>
+</html>

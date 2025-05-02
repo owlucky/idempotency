@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Flowers</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<h1>Flowers</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Art</th>
+        <th>Type</th>
+        <th>Price</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="flower : ${flowers}">
+        <td th:text="${flower.id}"></td>
+        <td th:text="${flower.species}"></td>
+        <td th:text="${flower.price}"></td>
+        <td>
+            <a th:href="@{/flowers/{id}/edit(id=${flower.id})}" class="button">Edit</a>
+            <a th:href="@{/flowers/{id}/delete(id=${flower.id})}" class="button">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<h2>Add Flower</h2>
+<form th:action="@{/flowers}" th:object="${newFlower}" method="post">
+    <label for="type">Type:</label>
+    <input type="text" id="species" th:field="*{species}" required><br><br>
+    <label for="price">Price:</label>
+    <input type="number" id="price" th:field="*{price}" step="0.01" required><br><br>
+    <button type="submit">Add</button>
+</form>
+<a th:href="@{/bouquets}" class="button">Bouquets</a>
+</body>
+</html>
